@@ -21,51 +21,26 @@
     <div id="my-table"></div>
     <script>
       const columns = [
-        // {
-        //   key: "id",
-        //   title: "ID",
-        //   value: (v) => v.id,
-        //   sortable: true,
-        //   filterOptions: (rows) => {
-        //     // generate groupings of 0-10, 10-20 etc...
-        //     let nums = {};
-        //     rows.forEach((row) => {
-        //       let num = Math.floor(row.id / 10);
-        //       if (nums[num] === undefined)
-        //         nums[num] = {
-        //           name: `${num * 10} to ${(num + 1) * 10}`,
-        //           value: num,
-        //         };
-        //     });
-        //     // fix order
-        //     nums = Object.entries(nums)
-        //       .sort()
-        //       .reduce((o, [k, v]) => ((o[k] = v), o), {});
-        //     return Object.values(nums);
-        //   },
-        //   filterValue: (v) => Math.floor(v.id / 10),
-        //   headerClass: "text-left",
-        // },
         {
           key: "county",
           title: "COUNTY",
           value: (v) => v.county,
           sortable: true,
           filterOptions: (rows) => {
-            let letrs = {};
+            let counties = {};
             rows.forEach((row) => {
-              let letr = row.county;
-              if (letrs[letr] === undefined)
-                letrs[letr] = {
-                  name: `${letr.toUpperCase()}`,
-                  value: letr.toLowerCase(),
+              let county = row.county;
+              if (counties[county] === undefined)
+                counties[county] = {
+                  name: `${county.toUpperCase()}`,
+                  value: county.toLowerCase(),
                 };
             });
             // fix order
-            letrs = Object.entries(letrs)
+            counties = Object.entries(counties)
               .sort()
               .reduce((o, [k, v]) => ((o[k] = v), o), {});
-            return Object.values(letrs);
+            return Object.values(counties);
           },
           filterValue: (v) => v.county.toLowerCase(),
         },
@@ -75,20 +50,20 @@
           value: (v) => v.member_city,
           sortable: true,
           filterOptions: (rows) => {
-            let letrs = {};
+            let cities = {};
             rows.forEach((row) => {
-              let letr = row.member_city;
-              if (letrs[letr] === undefined)
-                letrs[letr] = {
-                  name: `${letr.toUpperCase()}`,
-                  value: letr.toLowerCase(),
+              let city = row.member_city;
+              if (cities[city] === undefined)
+                cities[city] = {
+                  name: `${city.toUpperCase()}`,
+                  value: city.toLowerCase(),
                 };
             });
             // fix order
-            letrs = Object.entries(letrs)
+            cities = Object.entries(cities)
               .sort()
               .reduce((o, [k, v]) => ((o[k] = v), o), {});
-            return Object.values(letrs);
+            return Object.values(cities);
           },
           filterValue: (v) => v.member_city.toLowerCase(),
         },
@@ -98,20 +73,20 @@
           value: (v) => v.preferred_provider,
           sortable: true,
           filterOptions: (rows) => {
-            let letrs = {};
+            let providers = {};
             rows.forEach((row) => {
-              let letr = row.preferred_provider;
-              if (letrs[letr] === undefined)
-                letrs[letr] = {
-                  name: `${letr.toUpperCase()}`,
-                  value: letr.toLowerCase(),
+              let provider = row.preferred_provider;
+              if (providers[provider] === undefined)
+                providers[provider] = {
+                  name: `${provider.toUpperCase()}`,
+                  value: provider.toLowerCase(),
                 };
             });
             // fix order
-            letrs = Object.entries(letrs)
+            providers = Object.entries(providers)
               .sort()
               .reduce((o, [k, v]) => ((o[k] = v), o), {});
-            return Object.values(letrs);
+            return Object.values(providers);
           },
           filterValue: (v) => v.preferred_provider.toLowerCase(),
         },
@@ -121,20 +96,20 @@
         //   value: (v) => v.date_added,
         //   sortable: true,
         //   filterOptions: (rows) => {
-        //     let letrs = {};
+        //     let dates = {};
         //     rows.forEach((row) => {
-        //       let letr = row.date_added;
-        //       if (letrs[letr] === undefined)
-        //         letrs[letr] = {
-        //           name: `${letr.toUpperCase()}`,
-        //           value: letr.toLowerCase(),
+        //       let date = row.date_added;
+        //       if (dates[date] === undefined)
+        //         dates[date] = {
+        //           name: `${date.toUpperCase()}`,
+        //           value: date.toLowerCase(),
         //         };
         //     });
         //     // fix order
-        //     letrs = Object.entries(letrs)
+        //     dates = Object.entries(dates)
         //       .sort()
         //       .reduce((o, [k, v]) => ((o[k] = v), o), {});
-        //     return Object.values(letrs);
+        //     return Object.values(dates);
         //   },
         //   filterValue: (v) => v.date_added.toLowerCase(),
         // },
@@ -169,20 +144,20 @@
           value: (v) => v.diagnosis_category,
           sortable: true,
           filterOptions: (rows) => {
-            let letrs = {};
+            let diags = {};
             rows.forEach((row) => {
-              let letr = row.diagnosis_category;
-              if (letrs[letr] === undefined)
-                letrs[letr] = {
-                  name: `${letr.toUpperCase()}`,
-                  value: letr.toLowerCase(),
+              let diag = row.diagnosis_category;
+              if (diags[diag] === undefined)
+                diags[diag] = {
+                  name: `${diag.toUpperCase()}`,
+                  value: diag.toLowerCase(),
                 };
             });
             // fix order
-            letrs = Object.entries(letrs)
+            diags = Object.entries(diags)
               .sort()
               .reduce((o, [k, v]) => ((o[k] = v), o), {});
-            return Object.values(letrs);
+            return Object.values(diags);
           },
           filterValue: (v) => v.diagnosis_category.toLowerCase(),
         },
@@ -192,20 +167,20 @@
           value: (v) => v.age_range,
           sortable: true,
           filterOptions: (rows) => {
-            let letrs = {};
+            let ages = {};
             rows.forEach((row) => {
-              let letr = row.age_range;
-              if (letrs[letr] === undefined)
-                letrs[letr] = {
-                  name: `${letr.toUpperCase()}`,
-                  value: letr.toLowerCase(),
+              let age = row.age_range;
+              if (ages[age] === undefined)
+                ages[age] = {
+                  name: `${age.toUpperCase()}`,
+                  value: age.toLowerCase(),
                 };
             });
             // fix order
-            letrs = Object.entries(letrs)
+            ages = Object.entries(ages)
               .sort()
               .reduce((o, [k, v]) => ((o[k] = v), o), {});
-            return Object.values(letrs);
+            return Object.values(ages);
           },
           filterValue: (v) => v.age_range.toLowerCase(),
         },
