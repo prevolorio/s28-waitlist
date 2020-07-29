@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf8" />
+    <meta name="viewport" content="width=device-width" />
+
+    <title>Svelte app</title>
+
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="stylesheet" href="global.css" />
+    <link rel="stylesheet" href="/build/bundle.css" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    />
+
+    <script src="SvelteTableIIFE.js"></script>
+  </head>
+
+  <body>
+    <div id="my-table"></div>
+    <script>
+      const columns = [
+        // {
+        //   key: "id",
+        //   title: "ID",
+        //   value: (v) => v.id,
+        //   sortable: true,
+        //   filterOptions: (rows) => {
+        //     // generate groupings of 0-10, 10-20 etc...
+        //     let nums = {};
+        //     rows.forEach((row) => {
+        //       let num = Math.floor(row.id / 10);
+        //       if (nums[num] === undefined)
+        //         nums[num] = {
+        //           name: `${num * 10} to ${(num + 1) * 10}`,
+        //           value: num,
+        //         };
+        //     });
+        //     // fix order
+        //     nums = Object.entries(nums)
+        //       .sort()
+        //       .reduce((o, [k, v]) => ((o[k] = v), o), {});
+        //     return Object.values(nums);
+        //   },
+        //   filterValue: (v) => Math.floor(v.id / 10),
+        //   headerClass: "text-left",
+        // },
+        {
+          key: "county",
+          title: "COUNT",
+          value: (v) => v.county,
+          sortable: true,
+          filterOptions: (rows) => {
+            let letrs = {};
+            rows.forEach((row) => {
+              let letr = row.county;
+              if (letrs[letr] === undefined)
+                letrs[letr] = {
+                  name: `${letr.toUpperCase()}`,
+                  value: letr.toLowerCase(),
+                };
+            });
+            // fix order
+            letrs = Object.entries(letrs)
+              .sort()
+              .reduce((o, [k, v]) => ((o[k] = v), o), {});
+            return Object.values(letrs);
+          },
+          filterValue: (v) => v.county.toLowerCase(),
+        },
+        {
+          key: "member_city",
+          title: "MEMBER CITY",
+          value: (v) => v.member_city,
+          sortable: true,
+          filterOptions: (rows) => {
+            let letrs = {};
+            rows.forEach((row) => {
+              let letr = row.member_city;
+              if (letrs[letr] === undefined)
+                letrs[letr] = {
+                  name: `${letr.toUpperCase()}`,
+                  value: letr.toLowerCase(),
+                };
+            });
+            // fix order
+            letrs = Object.entries(letrs)
+              .sort()
+              .reduce((o, [k, v]) => ((o[k] = v), o), {});
+            return Object.values(letrs);
+          },
+          filterValue: (v) => v.member_city.toLowerCase(),
+        },
+        {
+          key: "preferred_provider",
+          title: "PREFERRED PROVIDER",
+          value: (v) => v.preferred_provider,
+          sortable: true,
+          filterOptions: (rows) => {
+            let letrs = {};
+            rows.forEach((row) => {
+              let letr = row.preferred_provider;
+              if (letrs[letr] === undefined)
+                letrs[letr] = {
+                  name: `${letr.toUpperCase()}`,
+                  value: letr.toLowerCase(),
+                };
+            });
+            // fix order
+            letrs = Object.entries(letrs)
+              .sort()
+              .reduce((o, [k, v]) => ((o[k] = v), o), {});
+            return Object.values(letrs);
+          },
+          filterValue: (v) => v.preferred_provider.toLowerCase(),
+        },
+        // {
+        //   key: "date_added",
+        //   title: "DATE_ADDED",
+        //   value: (v) => v.date_added,
+        //   sortable: true,
+        //   filterOptions: (rows) => {
+        //     let letrs = {};
+        //     rows.forEach((row) => {
+        //       let letr = row.date_added;
+        //       if (letrs[letr] === undefined)
+        //         letrs[letr] = {
+        //           name: `${letr.toUpperCase()}`,
+        //           value: letr.toLowerCase(),
+        //         };
+        //     });
+        //     // fix order
+        //     letrs = Object.entries(letrs)
+        //       .sort()
+        //       .reduce((o, [k, v]) => ((o[k] = v), o), {});
+        //     return Object.values(letrs);
+        //   },
+        //   filterValue: (v) => v.date_added.toLowerCase(),
+        // },
+        {
+          key: "days_waiting",
+          title: "DAYS WAITING",
+          value: (v) => v.days_waiting,
+          sortable: true,
+          filterOptions: (rows) => {
+            // generate groupings of 0-45, 45-90 etc...
+            let nums = {};
+            rows.forEach((row) => {
+              let num = Math.floor(row.days_waiting / 45);
+              if (nums[num] === undefined)
+                nums[num] = {
+                  name: `${num * 45} to ${(num + 1) * 45}`,
+                  value: num,
+                };
+            });
+            // fix order
+            nums = Object.entries(nums)
+              .sort()
+              .reduce((o, [k, v]) => ((o[k] = v), o), {});
+            return Object.values(nums);
+          },
+          filterValue: (v) => Math.floor(v.days_waiting / 45),
+          headerClass: "text-left",
+        },
+      ];
+
+      const rows = [
+        {
+          id: 1,
+          county: "Androscoggin",
+          member_city: "Auburn",
+          preferred_provider: "",
+          //date_added: "01/04/2020",
+          days_waiting: 42,
+        },
+        {
+          id: 2,
+          county: "Androscoggin",
+          member_city: "Auburn",
+          preferred_provider: "",
+          //date_added: "03/04/2020",
+          days_waiting: 23,
+        },
+        {
+          id: 3,
+          county: "Androscoggin",
+          member_city: "Auburn",
+          preferred_provider: "Bridges of Maine",
+          //date_added: "05/30/2020",
+          days_waiting: 12,
+        },
+        {
+          id: 4,
+          county: "Androscoggin",
+          member_city: "Auburn",
+          preferred_provider: "",
+          //date_added: "06/20/2020",
+          days_waiting: 52,
+        },
+        {
+          id: 5,
+          county: "Androscoggin",
+          member_city: "Auburn",
+          preferred_provider: "Gateway Community Services",
+          //date_added: "07/12/2020",
+          days_waiting: 33,
+        },
+        {
+          id: 6,
+          county: "Androscoggin",
+          member_city: "Lewiston",
+          preferred_provider: "",
+          //date_added: "07/15/2020",
+          days_waiting: 92,
+        },
+        {
+          id: 7,
+          county: "Androscoggin",
+          member_city: "Lewiston",
+          preferred_provider: "Bridges of Maine",
+          //date_added: "06/20/2020",
+          days_waiting: 122,
+        },
+        {
+          id: 8,
+          county: "Androscoggin",
+          member_city: "Mechanic Falls",
+          preferred_provider: "",
+          //date_added: "12/20/2019",
+          days_waiting: 242,
+        },
+        {
+          id: 9,
+          county: "Androscoggin",
+          member_city: "Polan",
+          preferred_provider: "",
+          //date_added: "03/24/2020",
+          days_waiting: 32,
+        },
+        {
+          id: 10,
+          county: "Aroostook",
+          member_city: "Amity",
+          preferred_provider: "",
+          //date_added: "06/12/2020",
+          days_waiting: 55,
+        },
+        {
+          id: 11,
+          county: "Aroostook",
+          member_city: "Ashland",
+          preferred_provider: "Living Innovations",
+          //date_added: "06/17/2020",
+          days_waiting: 62,
+        },
+        {
+          id: 12,
+          county: "Aroostook",
+          member_city: "Caribou",
+          preferred_provider: "",
+          //date_added: "06/25/2020",
+          days_waiting: 82,
+        },
+        {
+          id: 13,
+          county: "Aroostook",
+          member_city: "Caribou",
+          preferred_provider: "The Northern Lighthouse",
+          //date_added: "07/20/2020",
+          days_waiting: 99,
+        },
+        {
+          id: 14,
+          county: "Aroostook",
+          member_city: "Caribou",
+          preferred_provider: "The Northern Lighthouse",
+          //date_added: "07/12/2020",
+          days_waiting: 146,
+        },
+        {
+          id: 15,
+          county: "Aroostook",
+          member_city: "Eagle Lake",
+          preferred_provider: "",
+          //date_added: "05/20/2020",
+          days_waiting: 267,
+        },
+        {
+          id: 16,
+          county: "Aroostook",
+          member_city: "Fort Fairfield",
+          preferred_provider: "Northern Maine General",
+          //date_added: "04/12/2020",
+          days_waiting: 321,
+        },
+        {
+          id: 17,
+          county: "Cumberland",
+          member_city: "Fort Fairfield",
+          preferred_provider: "",
+          //date_added: "05/23/2020",
+          days_waiting: 12,
+        },
+        {
+          id: 18,
+          county: "Cumberland",
+          member_city: "Fort Kent",
+          preferred_provider: "Northeast Occupational",
+          //date_added: "05/17/2020",
+          days_waiting: 2,
+        },
+        {
+          id: 19,
+          county: "Cumberland",
+          member_city: "Hodgdon",
+          preferred_provider: "",
+          //date_added: "06/24/2020",
+          days_waiting: 75,
+        },
+        // etc...
+      ];
+      new SvelteTable({
+        target: document.querySelector("#my-table"),
+        props: {
+          rows,
+          columns,
+          classNameTable: "table table-dark",
+          classNameSelect: "custom-select",
+        },
+      });
+    </script>
+  </body>
+</html>
