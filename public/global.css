@@ -14,6 +14,10 @@ body {
     Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 }
 
+th.isSortable {
+  color: rgb(166, 177, 219);
+}
+
 a {
   color: rgb(0, 100, 200);
   text-decoration: none;
